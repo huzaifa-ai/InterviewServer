@@ -6,12 +6,11 @@ const POI = require('../models/poi');
 router.get('/', async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 50; // Increased default limit
+    const limit = parseInt(req.query.limit) || 50;
     const category = req.query.category;
     const searchQuery = req.query.search;
     const sentiment = req.query.sentiment;
 
-    // Build query
     const query = {};
     if (category && category !== 'all') {
       query.category = category;
