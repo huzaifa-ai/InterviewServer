@@ -97,36 +97,17 @@ router.get('/emotions', async (req, res) => {
   try {
     const emotionAnalytics = await POI.aggregate([
       {
-        $addFields: {
-          emotionValue: {
-            $switch: {
-              branches: [
-                { case: { $eq: ["$Emotion", "Joy"] }, then: { joy: 1 } },
-                { case: { $eq: ["$Emotion", "Sadness"] }, then: { sadness: 1 } },
-                { case: { $eq: ["$Emotion", "Fear"] }, then: { fear: 1 } },
-                { case: { $eq: ["$Emotion", "Disgust"] }, then: { disgust: 1 } },
-                { case: { $eq: ["$Emotion", "Anger"] }, then: { anger: 1 } },
-                { case: { $eq: ["$Emotion", "Happy"] }, then: { happy: 1 } },
-                { case: { $eq: ["$Emotion", "Calm"] }, then: { calm: 1 } },
-                { case: { $eq: ["$Emotion", "None"] }, then: { none: 1 } }
-              ],
-              default: {}
-            }
-          }
-        }
-      },
-      {
         $group: {
           _id: null,
           total: { $sum: 1 },
-          avgJoy: { $avg: "$emotionValue.joy" },
-          avgSadness: { $avg: "$emotionValue.sadness" },
-          avgFear: { $avg: "$emotionValue.fear" },
-          avgDisgust: { $avg: "$emotionValue.disgust" },
-          avgAnger: { $avg: "$emotionValue.anger" },
-          avgHappy: { $avg: "$emotionValue.happy" },
-          avgCalm: { $avg: "$emotionValue.calm" },
-          avgNone: { $avg: "$emotionValue.none" }
+          avgJoy: { $avg: "$emotions.joy" },
+          avgSadness: { $avg: "$emotions.sadness" },
+          avgFear: { $avg: "$emotions.fear" },
+          avgDisgust: { $avg: "$emotions.disgust" },
+          avgAnger: { $avg: "$emotions.anger" },
+          avgHappy: { $avg: "$emotions.happy" },
+          avgCalm: { $avg: "$emotions.calm" },
+          avgNone: { $avg: "$emotions.none" }
         }
       },
       {
