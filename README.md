@@ -1,3 +1,5 @@
+Note: I have pushed the env file as well just for the testing purposes. But we should never push secret keys to github
+
 # Points of Interest Backend
 
 This is the backend server for the Points of Interest application that provides API endpoints for managing and retrieving POI data with emotional analysis.
